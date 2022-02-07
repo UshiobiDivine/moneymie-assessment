@@ -27,7 +27,7 @@ public class CarServiceImplementation implements CarService {
 
     @Override
     public List<Car> getAll() throws IOException {
-        return objectMapper.readValue(new File("cars-large.json"), new TypeReference<List<Car>>() {
+        return objectMapper.readValue(new File("src/main/resources/cars-large.json"), new TypeReference<List<Car>>() {
         });
     }
 
@@ -67,10 +67,8 @@ public class CarServiceImplementation implements CarService {
             car.setColor(carRequest.getColor());
             car.setVin(carRequest.getVin());
             car.setYear(carRequest.getYear());
-
             cars.add(car);
-
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("cars-large.json"), cars);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/resources/cars-large.json"), cars);
             return new ApiResponse(true, 200, "Car details added successfully " + car);
         }
         return new ApiResponse(false, 500, "Error adding car details");
